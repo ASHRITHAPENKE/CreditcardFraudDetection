@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Analysis Report | SecurePay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root { --neon-green: #00ff88; --neon-red: #ff0055; --neon-yellow: #f5d300; --bg: #020204; }
+        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; }
+
+        .dashboard-container { padding: 50px; }
+        
+        .glass-panel {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            height: 100%;
+        }
+
+        h2, h4 { text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Dynamic Status Color */
+        .status-text { font-size: 2rem; font-weight: bold; text-shadow: 0 0 15px currentColor; }
+        .st-danger { color: var(--neon-red); }
+        .st-warning { color: var(--neon-yellow); }
+        .st-success { color: var(--neon-green); }
+
+        /* Custom Gauge Canvas */
+        #scoreCanvas { width: 100%; height: 250px; }
+        
+        .btn-back {
+            border: 1px solid #fff; color: #fff; text-decoration: none; padding: 10px 30px;
+            transition: 0.3s; display: inline-block; margin-top: 20px; text-transform: uppercase;
+        }
+        .btn-back:hover { background: #fff; color: #000; box-shadow: 0 0 20px #fff; }
+
+        /* Scanning Grid Background */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container dashboard-container">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h4 class="text-muted">TRANSACTION ID: #TRX-{{ range(1000, 9999) | random }}</h4>
+            <h1 class="status-text {{ 'st-danger' if score > 75 else 'st-warning' if score > 40 else 'st-success' }}">
+                <span id="typewriter"></span>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="glass-panel text-center">
+                <h4 style="color: #00f3ff">Risk Probability</h4>
+                <canvas id="scoreCanvas"></canvas>
+                <div style="font-size: 3rem; font-weight: bold;" id="scoreDisplay">0%</div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mb-4">
+            <div class="glass-panel">
+                <h4 style="color: #00f3ff">AI Reason Code (XAI)</h4>
+                <canvas id="shapChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <center><a href="/" class="btn-back">Initialize New Scan</a></center>
+</div>
+
+<script>
+    // --- 1. TYPEWRITER EFFECT FOR STATUS ---
+    const text = "{{ status }}";
+    const typewriter = document.getElementById('typewriter');
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            typewriter.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 50); // Speed of typing
+        }
+    }
+    type();
+
+    // --- 2. ANIMATED GAUGE (PURE CANVAS) ---
+    const score = {{ score }};
+    const canvas = document.getElementById('scoreCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 300; canvas.height = 200;
+    
+    let currentScore = 0;
+    
+    function drawGauge() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Background Arc
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, Math.PI, 0);
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = '#222';
+        ctx.stroke();
+
+        // Foreground Arc (Animated)
+        const angle = Math.PI + (Math.PI * (currentScore / 100));
+        
+        // Gradient Color
+        const grad = ctx.createLinearGradient(0, 0, 300, 0);
+        grad.addColorStop(0, '#00ff88'); // Green
+        grad.addColorStop(0.5, '#f5d300'); // Yellow
+        grad.addColorStop(1, '#ff0055'); // Red
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, Math.PI, angle);
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = grad;
+        ctx.stroke();
+
+        // Update Text
+        document.getElementById('scoreDisplay').innerText = Math.floor(currentScore) + "%";
+        
+        if (currentScore < score) {
+            currentScore += 0.5; // Animation Speed
+            requestAnimationFrame(drawGauge);
+        }
+    }
+    drawGauge();
+
+    // --- 3. NEON SHAP CHART (Chart.js) ---
+    const ctxShap = document.getElementById('shapChart').getContext('2d');
+    new Chart(ctxShap, {
+        type: 'bar',
+        data: {
+            labels: {{ shap_labels|tojson }},
+            datasets: [{
+                label: 'Influence Factor',
+                data: {{ shap_data|tojson }},
+                backgroundColor: 'rgba(0, 243, 255, 0.2)',
+                borderColor: '#00f3ff',
+                borderWidth: 2,
+                barThickness: 20
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: '#333' }, ticks: { color: '#fff' } },
+                y: { grid: { display: false }, ticks: { color: '#fff', font: {family: 'Rajdhani', size: 14} } }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,3547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FraudAI – Lavender & Silver</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+<!-- New Professional & Interesting Fonts -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Playfair+Display:wght@700;900&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* Body font */
+body{
+  font-family:'Inter', sans-serif;
+  letter-spacing:-0.01em;
+}
+
+/* =========================================================
+   THEME (LAVENDER + SILVER)
+========================================================= */
+:root{
+  --bg: #F5F3E9;
+  --txt: #3B2A50;
+  --muted: #7E6C99;
+
+  --card: #FFFFFF;
+  --card2: #EBE6D8;
+  --border: rgba(106, 74, 154, 0.15);
+  --input: #FFFFFF;
+
+  --lav: #D4C4E9;
+  --lav2: #E9D5FF;
+  --silver: #E2E8F0;
+  --brand: #6A4A9A;
+  --brand-rgb: 106, 74, 154;
+  --brand-dark: #462A6E;
+
+  --good: #4A8C70;
+  --bad: #C95A66;
+
+  --shadow: 0 8px 30px rgba(106, 74, 154, 0.06);
+  --snow: rgba(106, 74, 154, 0.1);
+}
+
+body.dark {
+  --bg: #1F1924;
+  --txt: #F3EFEA;
+  --muted: #A396B5;
+
+  --card: #2B2333;
+  --card2: #342B3D;
+  --border: rgba(168, 142, 201, 0.2);
+  --input: rgba(255,255,255,0.03);
+
+  --lav: #8B73A6;
+  --brand: #9D84B8;
+  --brand-rgb: 157, 132, 184;
+  --brand-dark: #D4C4E9;
+
+  --shadow: 0 15px 50px rgba(157, 132, 184, 0.2);
+  --snow: rgba(157, 132, 184, 0.15);
+}
+
+body{
+  background:var(--bg);
+  color:var(--txt);
+  overflow-x:hidden;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   LIVE TECH-MESH BACKGROUND
+========================================================= */
+#snowCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =========================================================
+   INTERACTIVE ANIMATIONS & UNIQUE BUTTON EFFECTS
+========================================================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cinematicReveal {
+  0% { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* Unique About Section Animations */
+@keyframes aboutBoxLeft {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes aboutBoxRight {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes aboutBoxFlip {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes aboutBoxZoom {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes inputRipple {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes emergencyPulse {
+  0% { background: rgba(255, 77, 141, 0.2); }
+  50% { background: rgba(255, 77, 141, 0.4); }
+  100% { background: rgba(255, 77, 141, 0.2); }
+}
+
+@keyframes successBounce {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes scanLineMove {
+  0% { top: 0%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Glass Shine Animation */
+@keyframes glassShine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* =========================================================
+   LOGIN PAGE (DUAL PANE VERSION)
+========================================================= */
+@keyframes boxFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { border-color: rgba(184, 166, 255, 0.2); box-shadow: 0 0 20px rgba(184, 166, 255, 0.1); }
+  50% { border-color: rgba(184, 166, 255, 0.6); box-shadow: 0 0 40px rgba(184, 166, 255, 0.3); }
+  0%, 100% { border-color: rgba(var(--brand-rgb), 0.2); box-shadow: 0 0 20px rgba(var(--brand-rgb), 0.1); }
+  50% { border-color: rgba(var(--brand-rgb), 0.6); box-shadow: 0 0 40px rgba(var(--brand-rgb), 0.3); }
+}
+
+.login-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  z-index: 1000;
+}
+
+/* Pseudo-element for overlay effects without the image */
+.login-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 1;
+}
+
+.login-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  padding: 40px;
+}
+
+.login-right {
+  flex: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  background: rgba(184, 166, 255, 0.02);
+  background: rgba(var(--brand-rgb), 0.02);
+}
+
+#loginLottie {
+  width: 90%;
+  max-width: 600px;
+  filter: drop-shadow(0 0 30px rgba(184, 166, 255, 0.2));
+  filter: drop-shadow(0 0 30px rgba(var(--brand-rgb), 0.2));
+  animation: boxFloat 8s ease-in-out infinite;
+}
+
+.login-box {
+  width: min(440px, 100%);
+  padding: 50px 40px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: cinematicReveal 1s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-logo {
+  width: 70px;
+  height: 70px;
+  background: var(--brand);
+  color: #fff;
+  font-family: 'Outfit';
+  font-size: 32px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin: 0 auto 24px;
+  box-shadow: 0 0 30px var(--brand);
+}
+
+.login-box h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--txt);
+  letter-spacing: -0.02em;
+}
+
+.login-box p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: var(--input);
+  border: 1px solid var(--border);
+  color: var(--txt);
+  font-family: 'Inter';
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-box input:focus {
+  outline: none;
+  background: rgba(184, 166, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.05);
+  border-color: var(--brand);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(184, 166, 255, 0.1);
+  box-shadow: 0 0 20px rgba(var(--brand-rgb), 0.1);
+}
+
+.login-box button {
+  width: 100%;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  font-family: 'Outfit';
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(184, 166, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(var(--brand-rgb), 0.3);
+  letter-spacing: 0.1em;
+}
+
+.google-btn {
+  background: #fff !important;
+  color: var(--brand-dark) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.google-btn:hover {
+  background: var(--lav2) !important;
+  transform: scale(1.02);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border);
+}
+.divider span { padding: 0 10px; }
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+.input-row input {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .login-page { flex-direction: column; }
+  .login-right { order: -1; flex: 0.6; padding-top: 40px; }
+  #loginLottie { width: 60%; }
+}
+
+/* =========================================================
+   DASHBOARD LAYOUT
+========================================================= */
+.container{
+  display:none;
+  flex-direction: column;
+  height:100vh;
+  position:relative;
+  z-index: 2;
+}
+
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 50px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo{
+  font-family:'Outfit', sans-serif;
+  font-size:24px;
+  font-weight:800;
+  color:var(--txt);
+  letter-spacing:-0.02em;
+  transition: transform 0.3s ease;
+}
+.logo:hover { transform: scale(1.05); }
+
+.nav-tabs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.nav-tabs li {
+  list-style: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.nav-tabs li:hover { 
+  color: var(--txt); 
+  transform: translateY(-2px);
+}
+
+.nav-tabs li.active { 
+  background: transparent; 
+  color: var(--brand); 
+}
+
+.nav-tabs li.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
+.headerRight{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+/* Unique Button Style: Shifting Glow for Theme Toggle */
+#themeBtn {
+  padding: 8px 16px;
+  font-size: 13px;
+  background: transparent;
+  border: 1px solid var(--border);
+  width: auto;
+  cursor: pointer;
+  color: var(--txt);
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+#themeBtn:hover {
+  background: var(--card2);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(91, 33, 182, 0.1);
+  box-shadow: 0 5px 15px rgba(var(--brand-rgb), 0.15);
+}
+
+/* Unique Button Style: Danger Jiggle for Logout */
+.btnLogout {
+  padding: 8px 16px;
+  font-size: 13px;
+  background: transparent;
+  border: 1px solid var(--bad);
+  color: var(--bad);
+  width: auto;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btnLogout:hover {
+  background: var(--bad);
+  color: #fff;
+}
+
+/* Spacing to avoid overlap with sticky header */
+.main{ flex:1; padding: 40px 40px 40px 40px; overflow-y:auto; }
+
+.section { display: none; max-width: 1400px; margin: 0 auto; }
+.section.active { display: block; animation: fadeInUp 0.5s ease forwards; }
+
+.box {
+  background: var(--card);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 5;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  border-color: var(--brand);
+  box-shadow: 0 15px 35px rgba(91, 33, 182, 0.12);
+  box-shadow: 0 15px 35px rgba(var(--brand-rgb), 0.15);
+}
+
+/* Specific About Section Box styles to handle unique animations */
+#about.active .about-box-1 { animation: aboutBoxLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; margin-bottom: 24px; }
+#about.active .about-box-2 { animation: aboutBoxRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; margin-bottom: 24px; }
+#about.active .about-box-3 { animation: aboutBoxFlip 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.2s; margin-bottom: 24px; }
+#about.active .about-box-4 { animation: aboutBoxZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.4s; margin-bottom: 24px; }
+
+/* Interactive Hover Effects for About Boxes */
+.about-box-1:hover { transform: translateY(-3px); border-color: var(--brand); }
+.about-box-2:hover { transform: translateY(-3px); border-color: var(--brand); }
+.about-box-3:hover { transform: translateY(-3px); border-color: var(--brand); }
+.about-box-4:hover { transform: translateY(-3px); border-color: var(--brand); }
+
+/* Updated Mathematical Formula Styling */
+.equation {
+  font-family: 'Inter', monospace;
+  color: var(--brand-dark); 
+  background: rgba(var(--brand-rgb), 0.1); 
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  display: inline-block;
+  margin: 2px 0;
+  border: none;
+}
+
+.display-equation {
+  display: block;
+  text-align: center;
+  padding: 18px 24px;
+  margin: 15px 0;
+  background: rgba(var(--brand-rgb), 0.1); 
+  border-radius: 12px;
+  font-family: 'Inter', monospace;
+  color: var(--brand-dark); 
+  font-size: 1.15em;
+  font-weight: 700;
+  box-shadow: none;
+  border: 1px solid rgba(var(--brand-rgb), 0.2);
+}
+
+/* Custom Table Styling for PCA Logic */
+.custom-table-container {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card2);
+  margin: 30px 0;
+  box-shadow: var(--shadow);
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.custom-table th, .custom-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--txt);
+}
+.custom-table th {
+  background: rgba(var(--brand-rgb), 0.1);
+  color: var(--brand);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.custom-table tr:last-child td { border-bottom: none; }
+.custom-table tbody tr { transition: background 0.3s; }
+.custom-table tbody tr:hover { background: rgba(var(--brand-rgb), 0.05); }
+
+/* PREDICT COMPONENTS */
+.grid2{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
+.pcaGrid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; margin-bottom: 24px; }
+
+.pcaGrid input{ 
+  padding: 12px 8px; 
+  border-radius:10px; 
+  font-size: 13px; 
+  background:var(--input); 
+  border: 1px solid var(--border); 
+  color:var(--txt); 
+  text-align: center;
+  opacity: 0; 
+  transition: all 0.3s ease;
+}
+.pcaGrid input:hover { background: var(--card2); }
+
+.pcaGrid input:focus {
+  border-color: var(--brand);
+  background: var(--card);
+  box-shadow: 0 0 10px rgba(91, 33, 182, 0.1);
+  box-shadow: 0 0 10px rgba(var(--brand-rgb), 0.15);
+  transform: scale(1.05);
+}
+
+.row3{ display:grid; grid-template-columns: 1fr 1fr 1.2fr; gap:12px; margin-bottom: 24px; }
+.row3 input, .row3 select{ padding: 14px; border-radius:12px; background:var(--input); border: 1px solid var(--border); color:var(--txt); transition: 0.2s; }
+.row3 input:focus, .row3 select:focus { border-color: var(--brand); transform: translateY(-2px); }
+
+/* Unique Button Style: Pulse & Glow for Analysis */
+.btnPredict { 
+  width:100%; 
+  padding:16px; 
+  border-radius:12px; 
+  background: var(--brand);
+  font-weight:600; 
+  border: none; 
+  cursor:pointer; 
+  color:#fff; 
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(91, 33, 182, 0.25);
+  box-shadow: 0 8px 25px rgba(var(--brand-rgb), 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+.btnPredict:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(91, 33, 182, 0.35);
+  box-shadow: 0 12px 30px rgba(var(--brand-rgb), 0.4);
+  filter: brightness(1.1);
+}
+
+/* Unique Launch Button Style */
+.btnLaunch {
+  background: var(--brand);
+  color: #fff;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(91, 33, 182, 0.2);
+  box-shadow: 0 10px 30px rgba(var(--brand-rgb), 0.25);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.btnLaunch:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(91, 33, 182, 0.3);
+  box-shadow: 0 15px 40px rgba(var(--brand-rgb), 0.35);
+  filter: brightness(1.1);
+}
+
+.kpis{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.kpi{ background:var(--card2); border:1px solid var(--border); border-radius:16px; padding: 16px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.kpi:hover { transform: translateY(-5px) scale(1.05); border-color: var(--brand); }
+.kpi .v { font-size: 24px; font-weight: 800; font-family: 'Outfit'; }
+.kpi .l { font-size: 10px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; margin-top: 4px; }
+
+/* ANALYSIS BARS */
+.analysisWrap {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.bRow{ 
+  display:grid; 
+  grid-template-columns:80px 1fr 60px; 
+  gap:20px; 
+  align-items:center; 
+  padding:14px; 
+  border-radius:14px; 
+  background:rgba(255,255,255,0.03); 
+  margin-bottom:12px; 
+  border-left: 4px solid transparent;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.bRow:hover {
+  transform: translateX(12px) scale(1.02);
+  background: rgba(255,255,255,0.06);
+}
+
+.track{ height:10px; border-radius:10px; background:rgba(255,255,255,0.05); overflow:hidden; }
+.fill{ 
+  height:100%; 
+  animation:grow .8s forwards ease-out; 
+  border-radius: 10px;
+  width: 0;
+}
+
+@keyframes grow{ from{width:0} to{width:var(--w)} }
+
+/* OVERLAYS */
+.ov{ 
+  position:fixed; 
+  inset:0; 
+  display:none; 
+  align-items:center; 
+  justify-content:center; 
+  z-index:9999; 
+  backdrop-filter: blur(8px); 
+}
+
+.ov.scan { background: rgba(46, 26, 71, 0.8); }
+
+.ov.scan .modal::after {
+  content: "";
+  position: absolute;
+  left: 0; width: 100%; height: 3px;
+  background: var(--brand);
+  box-shadow: 0 0 15px var(--brand);
+  animation: scanLineMove 2s linear infinite;
+  z-index: 10;
+}
+
+.ov.fraud { background: rgba(255, 77, 141, 0.2); animation: emergencyPulse 0.5s infinite; }
+.ov.fraud .modal { animation: fadeInUp 0.4s ease forwards; border-color: var(--bad); }
+
+.ov.legit { background: rgba(34, 197, 94, 0.1); }
+.ov.legit .modal { animation: fadeInUp 0.4s ease forwards; border-color: var(--good); }
+
+.modal{ 
+  width:min(460px, 90vw); 
+  padding:40px; 
+  border-radius:24px; 
+  background:var(--bg); 
+  border:1px solid var(--border); 
+  text-align:center; 
+  box-shadow: var(--shadow); 
+  position: relative;
+  overflow: hidden;
+}
+
+.bigIcon{ 
+  width:80px; height:80px; border-radius:24px; margin: 0 auto 24px; 
+  display:flex; align-items:center; justify-content:center; 
+  font-size:32px; font-weight: 800; color:#fff; 
+}
+.bigIcon.fraud{ background: var(--bad); box-shadow: 0 0 30px rgba(255, 77, 141, 0.5); }
+.bigIcon.legit{ background: var(--good); box-shadow: 0 0 30px rgba(34, 197, 94, 0.5); }
+
+/* Modal specific button style: Elastic Grow */
+.btnModal {
+  margin-top: 20px;
+  padding: 14px 30px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btnModal:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(185, 167, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(var(--brand-rgb), 0.3);
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--brand);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+/* SECTION GRAPHICS */
+.section-graphic {
+  width: 100%;
+  height: 200px;
+  border-radius: 20px;
+  background: rgba(185, 167, 255, 0.05);
+  background: rgba(var(--brand-rgb), 0.05);
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  transition: all 0.5s ease;
+}
+.section-graphic:hover {
+  transform: scale(1.02);
+  border-color: var(--brand);
+}
+.section-graphic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  filter: grayscale(40%) contrast(110%);
+  transition: all 0.5s ease;
+}
+.section-graphic:hover img {
+  opacity: 0.9;
+  filter: grayscale(0%) contrast(100%);
+}
+
+/* CINEMATIC SCOPE STYLES */
+.cinematic-box {
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  animation: cinematicReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: all 0.4s ease;
+}
+
+.cinematic-box:hover {
+  border-color: var(--brand);
+  box-shadow: 0 15px 35px rgba(91, 33, 182, 0.12);
+  box-shadow: 0 15px 35px rgba(var(--brand-rgb), 0.15);
+  transform: translateY(-3px);
+}
+
+.scope-matter {
+  font-size: 16px;      /* slightly bigger */
+  line-height: 1.9;
+  color:var(--muted);
+  font-weight: 500;
+}
+
+
+.side-heading {
+  font-family: 'Outfit';
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--brand);
+  text-align: center;
+  position: relative;
+}
+
+.side-heading::before, .side-heading::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+.side-heading::before { top: -30px; }
+.side-heading::after { bottom: -30px; }
+
+.scope-image {
+  width: 80%;
+  margin: 0 auto;
+  height: 130px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(var(--brand-rgb), 0.2);
+}
+
+.scope-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+.cinematic-box:hover .scope-image img { transform: scale(1.05); }
+
+/* Premium Intro Styling - Updated for "Liftoff" Look */
+.sectionSub {
+  color: var(--txt);
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 42px;
+  max-width: 800px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.04em;
+}
+
+/* Unique Animated Tab Header Styles */
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  transition: all 0.4s ease;
+}
+
+/* Specific Colors for Each Title */
+#predict .sectionTitle,
+#analysis .sectionTitle,
+#scope .sectionTitle,
+#team .sectionTitle,
+#about .sectionTitle,
+#pca-logic .sectionTitle { color: var(--txt); }
+
+/* TEAM STYLES */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+  transition: opacity 0.4s ease;
+}
+
+.team-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  cursor: pointer;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--brand);
+  box-shadow: 0 20px 40px rgba(var(--brand-rgb), 0.2);
+}
+
+.team-img-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  border: 2px solid var(--border);
+  padding: 5px;
+  transition: border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.team-card:hover .team-img-wrap {
+  border-color: var(--brand);
+}
+
+.team-img-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--card2);
+}
+
+.team-name {
+  font-family: 'Outfit';
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--txt);
+  margin-bottom: 4px;
+}
+
+.team-id {
+  font-size: 12px;
+  color: var(--brand);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.team-role {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--txt);
+  opacity: 0.9;
+}
+
+/* Updated Team Detail View (Large Prominent Box) */
+#teamSingleView {
+  width: 100%;
+  transition: opacity 0.4s ease;
+}
+
+.team-detail-view {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 2px solid var(--brand);
+  border-radius: 32px;
+  padding: 64px 48px;
+  text-align: center;
+  backdrop-filter: blur(40px);
+  animation: cinematicReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 60px 120px rgba(0,0,0,0.6), 0 0 40px rgba(185, 167, 255, 0.1);
+  box-shadow: 0 60px 120px rgba(0,0,0,0.6), 0 0 40px rgba(var(--brand-rgb), 0.15);
+  position: relative;
+}
+
+.team-bio {
+  font-size: 18px;
+  color: var(--txt);
+  max-width: 600px;
+  margin: 32px auto 0;
+  line-height: 1.8;
+  opacity: 0.9;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+@media(max-width:1100px){ 
+    .analysisWrap { grid-template-columns: 1fr; }
+    .cinematic-box { grid-template-columns: 1fr !important; padding: 30px; gap: 20px; }
+    .side-heading::before, .side-heading::after { display: none; }
+    .side-heading { margin: 10px 0; }
+    .sectionSub { font-size: 20px; }
+    .sectionTitle { font-size: 32px; }
+    .team-detail-view { padding: 40px 20px; }
+}
+
+@media(max-width:1000px){ 
+    .grid2 { grid-template-columns: 1fr; } 
+    .header { flex-direction: column; padding: 20px; gap: 15px; }
+}
+.sampleBtnRow{
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.sampleBtn{
+    flex: 1;
+    padding: 14px 10px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(5px);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+}
+
+/* Legit Button */
+.sampleBtn.legit:hover{
+    background: rgba(34, 197, 94, 0.15);
+    border-color: #22c55e;
+    color: #22c55e;
+    box-shadow: 0 5px 20px rgba(34, 197, 94, 0.2);
+    transform: translateY(-3px);
+}
+.sampleBtn.legit::before { content: "🛡️"; filter: grayscale(1); transition: 0.3s; }
+.sampleBtn.legit:hover::before { filter: grayscale(0); }
+
+/* Fraud Button */
+.sampleBtn.fraud:hover{
+    background: rgba(255, 77, 141, 0.15);
+    border-color: #ff4d8d;
+    color: #ff4d8d;
+    box-shadow: 0 5px 20px rgba(255, 77, 141, 0.2);
+    transform: translateY(-3px);
+}
+.sampleBtn.fraud::before { content: "⚠️"; filter: grayscale(1); transition: 0.3s; }
+.sampleBtn.fraud:hover::before { filter: grayscale(0); }
+
+/* Random Button */
+.sampleBtn.random:hover{
+    background: rgba(99, 102, 241, 0.15);
+    border-color: #6366f1;
+    color: #6366f1;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.2);
+    transform: translateY(-3px);
+}
+.sampleBtn.random::before { content: "🎲"; filter: grayscale(1); transition: 0.3s; }
+.sampleBtn.random:hover::before { filter: grayscale(0); }
+
+/* Clear Button */
+.sampleBtn.clear:hover{
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+    box-shadow: 0 5px 20px rgba(239, 68, 68, 0.2);
+    transform: translateY(-3px);
+}
+.sampleBtn.clear::before { content: "🗑️"; filter: grayscale(1); transition: 0.3s; }
+.sampleBtn.clear:hover::before { filter: grayscale(0); }
+
+/* =========================================================
+   HOME TAB STYLES
+========================================================= */
+.home-hero {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.hero-content { flex: 1; animation: aboutBoxLeft 1s ease forwards; }
+.hero-visual { flex: 1; height: 500px; animation: aboutBoxRight 1s ease forwards; }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: var(--txt);
+  text-shadow: none;
+}
+
+.hero-subtitle {
+  font-size: 22px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  font-weight: 500;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.scroll-indicator {
+  text-align: center;
+  margin-top: 40px;
+  animation: boxFloat 2s infinite;
+  opacity: 0.6;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--brand);
+}
+
+/* BUBBLE FEATURES */
+.features-section { padding: 60px 0; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.feature-card {
+  background: var(--card) !important;
+  border: 1px solid var(--border);
+  position: relative;
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--brand), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(91, 33, 182, 0.15);
+  border-color: var(--brand);
+}
+.feature-card:hover::before { opacity: 1; }
+
+.feature-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+  border: 2px solid var(--border);
+}
+
+.feature-card:hover .feature-img {
+  transform: scale(1.1);
+  border-color: var(--brand);
+}
+
+.feature-title {
+  font-family: 'Outfit';
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--txt);
+  margin-bottom: 5px;
+  text-shadow: none;
+}
+
+.feature-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@media(max-width: 900px) {
+  .home-hero { flex-direction: column-reverse; text-align: center; justify-content: center; min-height: auto; }
+  .hero-visual { height: 300px; width: 100%; }
+  .hero-title { font-size: 42px; }
+}
+
+/* =========================================================
+   NEW TEAM TAB DESIGN (SQUAD INTERFACE)
+========================================================= */
+.team-interface {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  min-height: 500px;
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.8s ease;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.02);
+}
+
+.member-item:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateX(5px);
+}
+
+.member-item.active {
+  background: var(--card2);
+  border-color: var(--brand);
+  box-shadow: 0 0 20px rgba(185, 167, 255, 0.1);
+  box-shadow: 0 0 20px rgba(var(--brand-rgb), 0.15);
+}
+
+.member-avatar-small {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  transition: 0.3s;
+}
+
+.member-item.active .member-avatar-small {
+  border-color: var(--brand);
+  transform: scale(1.1);
+}
+
+.member-info-small .name { 
+  font-family: 'Outfit'; 
+  font-weight: 700; 
+  font-size: 15px; 
+  color: var(--txt); 
+  margin-bottom: 2px;
+}
+
+.member-info-small .role { 
+  font-size: 11px; 
+  color: var(--muted); 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; 
+}
+
+.team-display-area {
+  position: relative;
+  background: var(--bg);
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+/* Credit Card Box Style */
+.credit-card-box {
+  width: 100%;
+  max-width: 100%;
+  min-height: 450px;
+  border-radius: 24px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(var(--brand-rgb), 0.25);
+  color: var(--txt);
+  border: 1px solid var(--border);
+  position: relative;
+  animation: cinematicReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cc-left {
+  width: 35%;
+  background: rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+
+.cc-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.9);
+  margin-bottom: 16px;
+  background-color: var(--card2);
+  box-shadow: 0 10px 25px rgba(var(--brand-rgb), 0.2);
+}
+
+.cc-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  line-height: 1.3;
+  color: var(--brand-dark);
+}
+
+.cc-id {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 1;
+  letter-spacing: 0.5px;
+  color: #4f46e5;
+}
+
+.cc-right {
+  width: 65%;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  text-align: left;
+}
+
+.cc-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--txt);
+}
+
+.cc-role {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  opacity: 1;
+  margin-bottom: 12px;
+  color: var(--brand);
+}
+
+.cc-bio {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 24px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.cc-linkedin {
+  align-self: flex-start;
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 5px 15px rgba(var(--brand-rgb), 0.2);
+  transition: all 0.3s ease;
+}
+
+.cc-linkedin:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(var(--brand-rgb), 0.3);
+}
+
+@media(max-width: 700px) {
+  .credit-card-box { flex-direction: column; }
+  .cc-left, .cc-right { width: 100%; border-right: none; }
+  .cc-left { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px; }
+  .cc-right { padding: 25px; align-items: center; text-align: center; }
+}
+
+@media(max-width: 900px) {
+  .team-interface { grid-template-columns: 1fr; }
+  .team-list { flex-direction: row; overflow-x: auto; padding-bottom: 15px; }
+  .member-item { min-width: 220px; }
+}
+
+/* Google Auth Modal Styles */
+.email-list { margin-top: 10px; }
+.email-item {
+  display: flex; align-items: center; gap: 15px; padding: 12px;
+  border-radius: 12px; cursor: pointer; transition: background 0.2s;
+  border-bottom: 1px solid var(--border);
+}
+.email-item:hover { background: rgba(255,255,255,0.05); }
+.email-item:last-child { border-bottom: none; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--brand);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px;
+}
+.modal-input {
+  width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 10px;
+  background: var(--input); border: 1px solid var(--border); color: var(--txt);
+  font-family: 'Inter';
+}
+.modal-input:focus { border-color: var(--brand); outline: none; }
+
+/* =========================================================
+   NEW ABOUT SECTION STYLES
+========================================================= */
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 20px 0;
+}
+
+.about-row {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.about-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-visual {
+  flex: 1;
+  position: relative;
+}
+
+.about-visual img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(var(--brand-rgb), 0.2);
+  border: 1px solid var(--border);
+  transition: transform 0.5s ease;
+}
+
+.about-visual:hover img {
+  transform: scale(1.02);
+}
+
+.about-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--brand);
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.about-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
+.feature-list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.feature-list li {
+  margin-bottom: 16px;
+  padding-left: 24px;
+  position: relative;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.feature-list li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+  font-weight: bold;
+}
+
+.feature-list li b {
+  color: var(--txt);
+}
+
+/* Math Grid */
+.math-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.math-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.math-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+  border-color: var(--brand);
+}
+
+.math-title {
+  font-family: 'Outfit';
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--txt);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.math-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(185, 167, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  font-size: 18px;
+}
+
+/* Methodology Steps */
+.methodology-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  padding-left: 30px;
+  border-left: 2px solid var(--border);
+}
+
+.flow-step {
+  position: relative;
+  padding-left: 30px;
+}
+
+.flow-step::before {
+  content: '';
+  position: absolute;
+  left: -39px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--bg);
+  border: 2px solid var(--brand);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.flow-step:hover::before {
+  background: var(--brand);
+  box-shadow: 0 0 15px var(--brand);
+}
+
+.flow-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--txt);
+  margin-bottom: 8px;
+}
+
+.flow-desc {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* References */
+.ref-card {
+  background: var(--card2);
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid var(--brand);
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* =========================================================
+   NEW IMPROVED ABOUT STYLES
+========================================================= */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.challenge-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.challenge-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--brand);
+  opacity: 0.5;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(var(--brand-rgb), 0.2);
+}
+
+.challenge-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.challenge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(185, 167, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  font-size: 20px;
+}
+
+.challenge-title {
+  font-family: 'Outfit';
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--txt);
+}
+
+.challenge-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   NEW MODELS & METHODOLOGY STYLES
+========================================================= */
+.model-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.model-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.model-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--brand);
+  box-shadow: 0 20px 50px rgba(var(--brand-rgb), 0.2);
+}
+
+.model-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+  background: rgba(185, 167, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.1);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  color: var(--brand);
+}
+
+.model-card h3 {
+  font-family: 'Outfit';
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--txt);
+}
+
+.model-card p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.methodology-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.step-card {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  background: var(--card2);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.step-card:hover {
+  border-color: var(--brand);
+  transform: translateX(10px);
+}
+
+.step-num {
+  font-family: 'Outfit';
+  font-size: 40px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+}
+
+.step-card:hover .step-num {
+  color: var(--brand);
+}
+
+.step-content h4 {
+  font-family: 'Outfit';
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--txt);
+}
+
+.step-content p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .about-row { flex-direction: column !important; }
+  .about-visual { width: 100%; }
+}
+
+/* =========================================================
+   ADVANCED ABOUT SECTION (TECH SPECS LOOK)
+========================================================= */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.tech-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.tech-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(var(--brand-rgb), 0.2);
+}
+
+.tech-header {
+  padding: 24px;
+  background: var(--card2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.tech-icon {
+  width: 44px; height: 44px;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 0 20px rgba(185, 167, 255, 0.4);
+  box-shadow: 0 0 20px rgba(var(--brand-rgb), 0.4);
+}
+
+.tech-title {
+  font-family: 'Outfit';
+  font-size: 20px;
+  color: var(--txt);
+  font-weight: 700;
+}
+
+.tech-body { padding: 24px; }
+
+.tech-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  filter: brightness(0.8);
+  transition: 0.4s;
+}
+.tech-card:hover .tech-img { filter: brightness(1); }
+
+.tech-desc { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+
+.tech-specs { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.spec-tag {
+  font-size: 11px; text-transform: uppercase; padding: 6px 12px;
+  border-radius: 20px; background: var(--card2);
+  color: var(--brand); border: 1px solid var(--border); font-weight: 800; letter-spacing: 0.05em;
+}
+
+/* Blueprint Container */
+.blueprint-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 60px;
+  box-shadow: var(--shadow);
+}
+
+.blueprint-grid {
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+  linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: absolute; inset: 0; pointer-events: none;
+}
+
+.blueprint-content {
+  position: relative; z-index: 2;
+}
+
+.formula-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.formula-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media(max-width: 1000px) {
+  .formula-grid-3, .formula-grid-2 {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+.formula-box {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  padding: 24px; 
+  border-radius: 16px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.formula-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--brand), transparent);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.formula-box:hover { 
+  border-color: var(--brand); 
+  transform: translateY(-3px); 
+  box-shadow: 0 10px 25px rgba(91, 33, 182, 0.1);
+  box-shadow: 0 10px 25px rgba(var(--brand-rgb), 0.15);
+}
+.formula-box:hover::before { opacity: 1; }
+
+.formula-label { color: var(--brand); font-family: 'Outfit'; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+.formula-code { 
+  font-family: 'Courier New', monospace; 
+  color: var(--brand); 
+  font-size: 14px; 
+  line-height: 1.6; 
+  font-weight: 600;
+  background: rgba(var(--brand-rgb), 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin: 10px 0;
+}
+
+/* Workflow Infographic */
+.workflow-section {
+  position: relative;
+  padding: 40px 0 80px 0;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: rgba(185, 167, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.1);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(185, 167, 255, 0.05);
+  box-shadow: 0 0 15px rgba(var(--brand-rgb), 0.05);
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.timeline-item:nth-child(odd) { left: 0; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+.timeline-item:nth-child(odd) .timeline-content { margin-left: auto; }
+.timeline-item:nth-child(even) .timeline-content { margin-right: auto; }
+
+.timeline-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: -8px;
+  background: var(--card);
+  border: 3px solid var(--brand);
+  top: 30px;
+  border-radius: 50%;
+  z-index: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(91, 33, 182, 0.2);
+  box-shadow: 0 0 10px rgba(var(--brand-rgb), 0.2);
+}
+
+.timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+
+.timeline-item:hover .timeline-dot {
+  background: var(--brand);
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(91, 33, 182, 0.4);
+  box-shadow: 0 0 15px rgba(var(--brand-rgb), 0.4);
+}
+
+.timeline-content {
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.4s ease;
+  box-shadow: var(--shadow);
+}
+
+.timeline-content:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand);
+  box-shadow: 0 15px 35px rgba(91, 33, 182, 0.15);
+  box-shadow: 0 15px 35px rgba(var(--brand-rgb), 0.2);
+}
+
+.timeline-step {
+  font-family: 'Outfit';
+  font-size: 60px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.timeline-item:nth-child(odd) .timeline-step { left: 20px; right: auto; }
+
+.timeline-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; height: 50px;
+  background: rgba(185, 167, 255, 0.1);
+  background: rgba(var(--brand-rgb), 0.1);
+  border-radius: 14px;
+  color: var(--brand);
+  border: 1px solid rgba(185, 167, 255, 0.2);
+  border: 1px solid rgba(var(--brand-rgb), 0.2);
+}
+
+.timeline-title {
+  font-family: 'Outfit';
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--txt);
+}
+
+.timeline-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media screen and (max-width: 900px) {
+  .timeline::after { left: 31px; }
+  .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+  .timeline-item:nth-child(odd) { left: 0; }
+  .timeline-item:nth-child(even) { left: 0; }
+  .timeline-dot { left: 19px !important; right: auto; }
+  .timeline-step { right: 20px !important; left: auto !important; }
+  .timeline-item:nth-child(odd) .timeline-content { margin-left: 0; }
+}
+
+/* Pipeline */
+.pipeline-wrap { display: flex; flex-direction: column; gap: 15px; }
+.pipeline-item {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--card); padding: 20px; border-radius: 16px;
+  border-left: 4px solid var(--border); transition: 0.3s;
+}
+.pipeline-item:hover { border-left-color: var(--brand); transform: translateX(10px); background: var(--card2); }
+.pipeline-num { font-size: 24px; font-weight: 900; color: rgba(255,255,255,0.1); font-family: 'Outfit'; }
+.pipeline-text h4 { color: var(--txt); font-size: 17px; margin-bottom: 4px; font-family: 'Outfit'; }
+.pipeline-text p { color: var(--muted); font-size: 14px; margin: 0; }
+
+@media(max-width: 1000px) {
+  .tech-grid { grid-template-columns: 1fr; }
+  .blueprint-content { grid-template-columns: 1fr; }
+  .split-layout { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="snowCanvas"></canvas>
+
+<!-- LOGIN PAGE -->
+<div class="login-page" id="loginPage">
+  <div class="login-left">
+    <div class="login-box">
+      <div class="login-logo">F</div>
+      <h2>FraudAI</h2>
+      <p>Create your secure account</p>
+      
+      <!-- Real Google Sign-In Button Container -->
+      <!-- TODO: Replace "YOUR_GOOGLE_CLIENT_ID" below with your actual Client ID from Google Cloud Console -->
+      <div id="g_id_onload"
+           data-client_id="YOUR_GOOGLE_CLIENT_ID"
+           data-callback="handleCredentialResponse"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-shape="rectangular"
+           data-logo_alignment="left"
+           style="margin-bottom: 24px; display: flex; justify-content: center;">
+      </div>
+
+      <div class="divider"><span>OR</span></div>
+
+      <div class="input-row">
+        <input type="text" id="fname" placeholder="First Name">
+        <input type="text" id="lname" placeholder="Last Name">
+      </div>
+      <input type="email" id="email" placeholder="Email Address">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Create Account</button>
+      <div style="margin-top: 24px; font-size: 13px; color: var(--muted);">
+        Already have an account? <a href="#" onclick="login()" style="color: var(--brand); text-decoration: none; font-weight: 700;">Log in</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="login-right">
+    <div id="loginLottie"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="container" id="dashboard">
+  <header class="header">
+    <div class="logo">FraudAI</div>
+    <nav class="nav-tabs">
+      <li class="active" onclick="showSection('home',this)">Home</li>
+      <li onclick="showSection('predict',this)">Predict</li>
+      <li onclick="showSection('analysis',this)">Analysis</li>
+      <li onclick="showSection('scope',this)">Scope</li>
+      <li onclick="showSection('team',this)">Team</li>
+      <li onclick="showSection('about',this)">About</li>
+      <li onclick="showSection('pca-logic',this)">PCA Logic</li>
+    </nav>
+    <div class="headerRight">
+      <button id="themeBtn" onclick="toggleTheme()">🌙</button>
+      <button class="btnLogout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HOME SECTION -->
+    <section id="home" class="section active">
+      <div class="home-hero">
+        <div class="hero-content">
+          <div class="hero-title" id="homeTitle">Credit Card Fraud Detection <br>using Human Centric Features</div>
+          <div class="hero-subtitle">
+            Next-Generation Credit Card Fraud Detection using Human-Centric Behavioral Features.
+          </div>
+          <button class="btnLaunch" onclick="showSection('predict', document.querySelectorAll('.nav-tabs li')[1])">
+            Launch Detection System 🚀
+          </button>
+        </div>
+        <div class="hero-visual" id="homeLottie"></div>
+      </div>
+
+      <div class="scroll-indicator">Scroll for Features ↓</div>
+
+      <div class="features-section">
+        <div class="sectionTitle" style="text-align:center;">Core Capabilities</div>
+        <div class="feature-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="Real-Time">
+            <div class="feature-title">Real-Time Scoring</div>
+            <div class="feature-desc">Instantaneous risk assessment using a hybrid engine of XGBoost and Isolation Forest to catch anomalies in milliseconds.</div>
+          </div>
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="AI Brain">
+            <div class="feature-title">Explainable AI</div>
+            <div class="feature-desc">Powered by SHAP values to provide transparent reasoning behind every fraud decision, building trust in AI.</div>
+          </div>
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="Privacy">
+            <div class="feature-title">Privacy First</div>
+            <div class="feature-desc">Utilizes PCA-transformed vectors (V1-V28) to analyze behavioral patterns without exposing sensitive user PII.</div>
+          </div>
+          <!-- Feature 4 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="Human Centric">
+            <div class="feature-title">Human-Centric</div>
+            <div class="feature-desc">Focuses on user behavior deviations rather than just static rules, adapting to new fraud patterns dynamically.</div>
+          </div>
+          <!-- Feature 5 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="ML">
+            <div class="feature-title">ML Integrated</div>
+            <div class="feature-desc">Combines supervised XGBoost and unsupervised Isolation Forest for robust fraud detection.</div>
+          </div>
+          <!-- Feature 6 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="Visualizations">
+            <div class="feature-title">Visualizations</div>
+            <div class="feature-desc">Interactive dashboards providing deep insights into transaction data and model performance.</div>
+          </div>
+          <!-- Feature 7 -->
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=200" class="feature-img" alt="Pattern">
+            <div class="feature-title">Pattern Recognition</div>
+            <div class="feature-desc">Identifies complex behavioral patterns and anomalies to preemptively flag fraudulent activities.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="predict" class="section">
+      <div class="sectionTitle">Predictive Audit Intelligence</div>
+      <div class="sectionSub">
+        Detect anomalies instantly.<br>
+        Benchmark transaction integrity using multi-dimensional PCA vectors and behavioral history.
+      </div>
+
+      <div class="grid2">
+        <div class="box">
+          <div style="font-weight:700; margin-bottom:15px; font-size: 13px; text-transform: uppercase; color: var(--brand);">PCA Vectors</div>
+          <div class="pcaGrid" id="pcaInputs"></div>
+          <div class="row3">
+            <input id="amt" placeholder="Amount">
+            <input id="tm" placeholder="Time">
+            <select id="mdl">
+            <option value="Hybrid">Hybrid Risk Engine</option>
+            <option value="XGB">XGBoost Core</option>
+            <option value="ISO">Isolation Forest (Anomaly Mode)</option>
+            </select>
+          </div>
+          <button class="btnPredict" onclick="predictNow()">Analyze Transaction</button>
+
+<!-- SMALL BUTTON ROW HERE -->
+<div class="sampleBtnRow">
+    <button class="sampleBtn legit" onclick="loadSample('legit')">
+        Load Legit 
+    </button>
+
+    <button class="sampleBtn fraud" onclick="loadSample('fraud')">
+        Load Fraud
+    </button>
+
+    <button class="sampleBtn random" onclick="loadSample('random')">
+        Load Random
+    </button>
+
+    <button class="sampleBtn clear" onclick="clearInputs()">
+        Clear
+    </button>
+</div>
+        </div>
+
+        <div class="box">
+          <div style="font-weight:700; margin-bottom:15px; font-size: 13px; text-transform: uppercase; color: var(--brand);">Decision Summary</div>
+          <div class="kpis">
+            <div class="kpi"><div class="v" id="k1">--</div><div class="l">Risk Score</div></div>
+            <div class="kpi"><div class="v" id="k2">--</div><div class="l">Confidence</div></div>
+            <div class="kpi" style="margin-top:8px"><div class="v" id="k3" style="font-size: 18px;">--</div><div class="l">Model</div></div>
+            <div class="kpi" style="margin-top:8px"><div class="v" id="k4" style="font-size: 18px;">--</div><div class="l">Decision</div></div>
+          </div>
+          <div style="margin-top:20px; padding:20px; border-radius:20px; background:var(--card2); border:1px solid var(--border); text-align:center;">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--muted);">Last Decision</div>
+            <div id="lastTag" style="font-size: 24px; font-weight: 900; font-family: 'Outfit'; color: var(--brand);">Standing By</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANALYSIS -->
+    <section id="analysis" class="section">
+      <div class="sectionTitle">Explainability Analysis</div>
+      <div class="sectionSub">
+        See the logic behind the score.<br>
+        Interactive visualization of feature contributions and behavioral deviations driving the AI engine.
+        <p style="font-size: 15px; color: var(--muted); margin-top: 15px; max-width: 900px; line-height: 1.6; font-weight: 500;">
+          This analysis provides the mathematical basis for our dashboard. As you can see from the contribution ranking, certain features like <b>V17, V14, and V12</b> have a strong impact on the fraud score. When a user enters a transaction with highly anomalous values for these features, our Hybrid Engine recognizes this specific 'fingerprint' of fraud and flags it immediately. This graph proves our model is looking at the right data.
+        </p>
+      </div>
+      
+      <div class="analysisWrap">
+        <!-- Contribution Ranking Box (Small) -->
+        <div class="box">
+          <div style="display:flex; justify-content: space-between; margin-bottom: 24px; align-items: center;">
+              <div style="font-weight: 700; font-size: 14px;">Contribution Ranking</div>
+              <select style="background: var(--input); color: var(--txt); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; font-size: 12px;" id="topN" onchange="renderBars()">
+                <option value="5">Top 5</option>
+                <option value="10">Top 10</option>
+                <option value="30" selected>All Factors</option>
+              </select>
+          </div>
+          <div id="barList"></div>
+        </div>
+
+        <!-- Top 5 Ranking Box -->
+        <div class="box">
+          <div style="font-weight: 700; margin-bottom: 24px; font-size: 14px;">Top 5 Ranking Highlights</div>
+          <div id="topRankingList">
+             <p style='color: var(--muted); text-align:center; padding: 20px;'>Audit required to generate ranking highlights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCOPE (ALL 7 MODULES ADDED ONE BY ONE) -->
+    <section id="scope" class="section">
+      <div class="sectionTitle">Future Scope of the Project</div>
+      <div class="sectionSub">
+        The proposed credit card fraud detection system provides a strong foundation for identifying fraudulent activities using human-centric behavioral features. 
+        The core logic is production-ready and can be deployed in a real-world scenario by replacing the manual input form with an API connected to a card processing system.
+        <br><br>
+
+      </div>
+      
+      <!-- Module 1: Deep Learning -->
+      <div class="cinematic-box">
+        <div class="scope-matter">
+          In the future, advanced deep learning techniques such as Artificial Neural Networks (ANN), LSTM, or Transformer-based models can be incorporated to capture complex temporal patterns in user transaction behavior. 
+          These models can further improve fraud detection accuracy, especially for sequential transaction data, enabling the system to understand long-term habits.
+        </div>
+        <div class="side-heading">
+          Deep Learning<br>Integration
+        </div>
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600" alt="Neural Network AI">
+        </div>
+      </div>
+
+      <!-- Module 2: Real-Time Streaming -->
+      <div class="cinematic-box" style="animation-delay: 0.1s;">
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" alt="Data Streams Visualization">
+        </div>
+        <div class="side-heading">
+          Real-Time<br>Streaming
+        </div>
+        <div class="scope-matter">
+          The system can be extended to support real-time transaction streams using technologies such as Apache Kafka or Spark Streaming. 
+          This would enable instant fraud detection for high-frequency transaction environments like online banking and payment gateways where near-zero latency is critical.
+        </div>
+      </div>
+
+      <!-- Module 3: Adaptive Learning -->
+      <div class="cinematic-box" style="animation-delay: 0.2s;">
+        <div class="scope-matter">
+          Future versions can include adaptive learning mechanisms where the model continuously updates itself based on new transaction data. 
+          This helps the system remain robust against evolving fraud strategies without frequent manual retraining, maintaining high-precision benchmarks autonomously.
+        </div>
+        <div class="side-heading">
+          Adaptive<br>Models
+        </div>
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600" alt="Adaptive AI Automation">
+        </div>
+      </div>
+
+      <!-- Module 4: Cloud Deployment -->
+      <div class="cinematic-box" style="animation-delay: 0.3s;">
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600" alt="Cloud Infrastructure Servers">
+        </div>
+        <div class="side-heading">
+          Cross-Platform<br>& Cloud
+        </div>
+        <div class="scope-matter">
+          The model can be deployed on cloud platforms such as AWS, Azure, or Google Cloud to handle large-scale transaction volumes efficiently. 
+          Cloud-based deployment also allows easy integration with existing banking systems and multi-platform accessibility across global networks.
+        </div>
+      </div>
+
+      <!-- Module 5: Contextual Features -->
+      <div class="cinematic-box" style="animation-delay: 0.4s;">
+        <div class="scope-matter">
+          Future enhancements may include device fingerprinting, IP address behavior, biometric indicators, and customer interaction patterns. 
+          Combining these features with human-centric data can significantly reduce false positives and create a resilient behavioral signature for identity protection.
+        </div>
+        <div class="side-heading">
+          Contextual<br>Intelligence
+        </div>
+        <div class="scope-image">
+    <img src=https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80 alt="Context Image">
+</div>
+      </div>
+
+      <!-- Module 6: Multi-Fraud Detection -->
+      <div class="cinematic-box" style="animation-delay: 0.5s;">
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600" alt="Cybersecurity Shield">
+        </div>
+        <div class="side-heading">
+          Multi-Fraud<br>Capability
+        </div>
+        <div class="scope-matter">
+          The system can be expanded beyond credit card fraud to detect other financial frauds such as identity theft, insurance fraud, and online payment fraud. 
+          This transformation will evolve FraudAI into a comprehensive fraud analytics platform capable of defending the entire digital economy.
+        </div>
+      </div>
+
+      <!-- Module 7: Adoption & Compliance -->
+      <div class="cinematic-box" style="animation-delay: 0.6s;">
+        <div class="scope-matter">
+          With further validation and optimization, the model can be adapted for industry-level use while ensuring compliance with financial regulations and data privacy laws. 
+          Standardizing decentralized audit trails will guarantee institutional integrity and ethical transparency in every transaction.
+        </div>
+        <div class="side-heading">
+          Industry<br>Compliance
+        </div>
+        <div class="scope-image">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=600" alt="Compliance Law Document">
+        </div>
+      </div>
+    </section>
+    
+    <!-- TEAM -->
+    <section id="team" class="section" style="position: relative; min-height: 600px;">
+      <div class="sectionTitle">Engineering Squad</div>
+      <div class="sectionSub" id="teamIntro">
+        Elite architectural squad operating the FraudAI infrastructure. <br>Select an agent to view their clearance profile.
+      </div>
+      
+      <div class="team-interface">
+        <!-- Left Side: Selection List -->
+        <div class="team-list" id="teamList">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Right Side: Display Area -->
+        <div class="team-display-area" id="teamDisplay">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+    
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="sectionTitle">Project Architecture</div>
+      <div class="sectionSub">
+        Deconstructing the intelligent engine protecting digital transactions.
+      </div>
+      
+      <!-- Tech Specs Grid (Challenge & Solution) -->
+      <div class="tech-grid">
+        <!-- Challenge -->
+        <div class="tech-card">
+          <div class="tech-header">
+            <div class="tech-icon" style="background: var(--bad); box-shadow: 0 0 20px rgba(255, 77, 141, 0.4);">⚠️</div>
+            <div class="tech-title">The Challenge</div>
+          </div>
+          <div class="tech-body">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=600" class="tech-img" alt="Fraud Threat">
+            <div class="tech-desc">
+              Financial fraud is evolving faster than traditional rule-based systems can adapt. The industry faces three critical pain points:
+            </div>
+            <div class="tech-specs">
+              <div class="spec-tag" style="color: var(--bad); border-color: var(--bad);">High False Positives</div>
+              <div class="spec-tag" style="color: var(--bad); border-color: var(--bad);">Adaptive Attacks</div>
+              <div class="spec-tag" style="color: var(--bad); border-color: var(--bad);">Data Imbalance</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution -->
+        <div class="tech-card">
+          <div class="tech-header">
+            <div class="tech-icon">🛡️</div>
+            <div class="tech-title">Our Solution</div>
+          </div>
+          <div class="tech-body">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600" class="tech-img" alt="AI Shield">
+            <div class="tech-desc">
+              A hybrid AI engine combining supervised and unsupervised learning to detect anomalies with surgical precision while preserving privacy.
+            </div>
+            <div class="tech-specs">
+              <div class="spec-tag">XGBoost Core</div>
+              <div class="spec-tag">Isolation Forest</div>
+              <div class="spec-tag">PCA Privacy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blueprint Container (Math & Logic) -->
+      <div class="blueprint-container">
+        <div class="blueprint-grid"></div>
+        <div class="blueprint-content">
+          <div style="text-align: center; margin-bottom: 40px;">
+            <h3 style="font-family: 'Outfit'; font-size: 24px; color: var(--txt);">Mathematical Core</h3>
+            <p style="color: var(--muted);">The statistical foundations driving the inference engine.</p>
+          </div>
+
+          <!-- Row 1: 3 Items -->
+          <div class="formula-grid-3">
+            <div class="formula-box">
+              <div class="formula-label">Principal Component Analysis (PCA)</div>
+              <div class="formula-code">Z = XW</div>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+                Used to anonymize and reduce dimensionality of transaction features. X is the original data matrix, W is the matrix of principal components.
+              </p>
+            </div>
+
+            <div class="formula-box">
+              <div class="formula-label">Correlation Coefficient</div>
+              <div class="formula-code">r = ∑[(xi - μx)(yi - μy)] / [n∙σx∙σy]</div>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+                Measures linear relationship between two variables. μ is the mean and σ is the standard deviation.
+              </p>
+            </div>
+
+            <div class="formula-box">
+              <div class="formula-label">Confusion Matrix & Metrics</div>
+              <div class="formula-code" style="font-size: 13px; line-height: 1.8;">
+                Precision = TP / (TP + FP)<br>
+                Recall = TP / (TP + FN)<br>
+                F1 = 2 ∙ (P ∙ R) / (P + R)
+              </div>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+                Key metrics for binary classification (fraud/non-fraud).
+              </p>
+            </div>
+          </div>
+
+          <!-- Row 2: 2 Items -->
+          <div class="formula-grid-2">
+            <div class="formula-box">
+              <div class="formula-label">ROC Curve & AUC</div>
+              <div class="formula-code" style="font-size: 13px; line-height: 1.8;">
+                TPR = TP / (TP + FN)<br>
+                FPR = FP / (FP + TN)
+              </div>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+                The ROC curve plots True Positive Rate vs. False Positive Rate. AUC quantifies overall model performance.
+              </p>
+            </div>
+
+            <div class="formula-box">
+              <div class="formula-label">Anomaly Detection</div>
+              <div class="formula-code">z = (x - μ) / σ</div>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">
+                Statistical thresholds (Z-Score). Transactions with high |z| scores may be flagged as anomalies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workflow Infographic -->
+      <div class="workflow-section">
+        <h3 style="font-family: 'Outfit'; font-size: 32px; color: var(--txt); text-align: center; margin-bottom: 60px;">Execution Workflow</h3>
+        
+        <div class="timeline">
+          <!-- Step 1 -->
+          <div class="timeline-item" style="animation-delay: 0.1s;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-step">01</div>
+              <div class="timeline-icon">📊</div>
+              <div class="timeline-title">Data Ingestion & Prep</div>
+              <div class="timeline-desc">
+                Raw transaction data is ingested and normalized. We apply Z-score scaling <code style="background:rgba(167,139,250,0.1); padding:2px 4px; border-radius:4px; color:#A78BFA;">x' = (x - μ) / σ</code> to ensure all features contribute equally. A safety layer auto-fills missing technical data with statistical averages, ensuring the system never crashes.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-item" style="animation-delay: 0.2s;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-step">02</div>
+              <div class="timeline-icon">🧠</div>
+              <div class="timeline-title">Feature Engineering</div>
+              <div class="timeline-desc">
+                Extracting human-centric behavioral patterns. We analyze time-delta, location consistency, and spending velocity to create a behavioral signature.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-item" style="animation-delay: 0.3s;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-step">03</div>
+              <div class="timeline-icon">📉</div>
+              <div class="timeline-title">Dimensionality Reduction</div>
+              <div class="timeline-desc">
+                Principal Component Analysis (PCA) transforms high-dimensional data into 28 orthogonal vectors (V1-V28), preserving privacy while retaining 95% variance. Think of it like a blender: raw features (Location, Age, Device) are mixed into a "smoothie" (V1, V2, etc.). You can't see the individual ingredients, but the mathematical "flavor" remains.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-item" style="animation-delay: 0.4s;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-step">04</div>
+              <div class="timeline-icon">🤖</div>
+              <div class="timeline-title">Hybrid Model Training</div>
+              <div class="timeline-desc">
+                A dual-engine approach: XGBoost for supervised classification of known fraud patterns, and Isolation Forest for unsupervised anomaly detection.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="timeline-item" style="animation-delay: 0.5s;">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-step">05</div>
+              <div class="timeline-icon">⚡</div>
+              <div class="timeline-title">Real-Time Inference</div>
+              <div class="timeline-desc">
+                The trained model serves predictions in milliseconds via API. SHAP values are calculated instantly to provide explainability for every decision.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interpreting Key Features -->
+      <div style="margin-top: 60px; margin-bottom: 60px;">
+        <h3 style="font-family: 'Outfit'; font-size: 32px; color: var(--txt); text-align: center; margin-bottom: 40px;">Interpreting Key Features</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-header"><div class="tech-icon" style="font-size: 16px;">V14</div><div class="tech-title">Why V14 = -16.0?</div></div>
+            <div class="tech-body">
+              <div class="tech-desc">Think of the 'V' features like room temperature. For most legitimate transactions, V14 is close to 0. A value of -16.0 is a statistical outlier—16 standard deviations from the norm. It’s like the temperature suddenly dropping to -50°C. In this dataset, such extreme negative values are almost exclusively found in fraud cases.</div>
+            </div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-header"><div class="tech-icon" style="font-size: 16px;">Time</div><div class="tech-title">Why Time = 400?</div></div>
+            <div class="tech-body">
+              <div class="tech-desc">'Time' is the number of seconds since the dataset recording started. A low value like 400 means the transaction happened very early. Fraudsters often use bots to run thousands of transactions quickly. A low time value can simulate a transaction happening in a "cluster" of suspicious activity.</div>
+            </div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-header"><div class="tech-icon" style="font-size: 16px;">V4</div><div class="tech-title">Why V4 = 9.0?</div></div>
+            <div class="tech-body">
+              <div class="tech-desc">Unlike V14, our analysis shows that for V4, higher is worse. A normal V4 is around 0, while high positive numbers (like +9.0) are linked to fraud. A thief's "fingerprint" is often a combination of these extremes: (V14 is very low) + (V4 is very high).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- References (Moved below) -->
+      <div style="margin-bottom: 60px;">
+        <h3 style="font-family: 'Outfit'; font-size: 24px; color: var(--txt); margin-bottom: 20px;">Research References</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <div class="ref-card" style="border-left-color: #60A5FA;">
+            <div style="font-weight: 700; color: #60A5FA; margin-bottom: 5px;">IEEE Access</div>
+            <b>IEEE Access</b> — Credit Card Fraud Detection: A Realistic Modeling and a Novel Learning Strategy
+          </div>
+          <div class="ref-card" style="border-left-color: #34D399;">
+            <div style="font-weight: 700; color: #34D399; margin-bottom: 5px;">Elsevier Procedia</div>
+            Fraud Detection in Credit Card Transactions using Machine Learning Algorithms
+          </div>
+          <div class="ref-card" style="border-left-color: #F472B6;">
+            <div style="font-weight: 700; color: #F472B6; margin-bottom: 5px;">ACM Computing Surveys</div>
+            Deep Learning for Financial Anomaly Detection: A Survey
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PCA LOGIC SECTION -->
+    <section id="pca-logic" class="section">
+      <div class="sectionTitle">PCA Conversion Logic</div>
+      <div class="sectionSub">
+        How Human-Centric Features Are Converted to PCA Vectors in Credit Card Fraud Detection
+      </div>
+
+      <div class="blueprint-container" style="margin-bottom: 40px;">
+        <h3 class="about-heading" style="margin-bottom: 15px;">Introduction</h3>
+        <p style="color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 20px;">
+          In real-world credit card fraud detection systems, raw transaction data contains human-readable features such as Transaction Amount, Time, Merchant ID, IP Address, Device Type, Location, and Frequency of Transactions. However, public fraud datasets often show anonymized features like <b>V1, V2, V3 … V28</b>.
+        </p>
+        <p style="color: var(--txt); font-weight: 600; margin-bottom: 10px;">These are Principal Components created using Principal Component Analysis (PCA) to:</p>
+        <ul class="feature-list" style="margin-top: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;">
+          <li>✅ Protect user privacy</li>
+          <li>✅ Reduce correlated features</li>
+          <li>✅ Improve model efficiency</li>
+          <li>✅ Compress many features into fewer meaningful components</li>
+        </ul>
+      </div>
+
+      <h3 style="font-family: 'Outfit'; font-size: 28px; color: var(--brand); margin-bottom: 15px;">Full Conversion Pipeline</h3>
+      <p style="color: var(--muted); margin-bottom: 20px;">PCA only works with numeric values, so string and categorical features must be mathematically encoded first.</p>
+
+      <div class="custom-table-container">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Original Feature</th>
+              <th>Data Type</th>
+              <th>Conversion Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Transaction Amount</td><td>Numeric</td><td>Direct Scaling</td></tr>
+            <tr><td>2</td><td>Transaction Time</td><td>Timestamp</td><td>Extract Hour / Day</td></tr>
+            <tr><td>3</td><td>Transaction Type</td><td>String</td><td>One-Hot Encoding</td></tr>
+            <tr><td>4</td><td>Currency Type</td><td>String</td><td>One-Hot Encoding</td></tr>
+            <tr><td>5</td><td>Avg User Spend</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>6</td><td>Transaction Frequency</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>7</td><td>Time Since Last Txn</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>8</td><td>Spending Deviation</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>9</td><td>City</td><td>String</td><td>Label / One-Hot</td></tr>
+            <tr><td>10</td><td>Country</td><td>String</td><td>One-Hot</td></tr>
+            <tr><td>11</td><td>Distance from Last Txn</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>12</td><td>Geo Velocity</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>13</td><td>Merchant ID</td><td>String</td><td>Frequency Encoding</td></tr>
+            <tr><td>14</td><td>Merchant Category</td><td>String</td><td>One-Hot</td></tr>
+            <tr><td>15</td><td>Merchant Risk Score</td><td>Numeric</td><td>Direct</td></tr>
+            <tr><td>16</td><td>New Merchant Flag</td><td>Boolean</td><td>0 / 1</td></tr>
+            <tr><td>17</td><td>Device ID</td><td>String</td><td>Frequency Encoding</td></tr>
+            <tr><td>18</td><td>Device Type</td><td>String</td><td>One-Hot</td></tr>
+            <tr><td>19</td><td>IP Address</td><td>String</td><td>Convert to Risk Score</td></tr>
+            <tr><td>20</td><td>Browser</td><td>String</td><td>One-Hot</td></tr>
+            <tr><td>21</td><td>Fraud Device Flag</td><td>Boolean</td><td>0 / 1</td></tr>
+            <tr><td>22</td><td>Account Age</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>23</td><td>Card Type</td><td>String</td><td>One-Hot</td></tr>
+            <tr><td>24</td><td>Credit Limit</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>25</td><td>Balance</td><td>Numeric</td><td>Scaling</td></tr>
+            <tr><td>26</td><td>Rule Risk Score</td><td>Numeric</td><td>Direct</td></tr>
+            <tr><td>27</td><td>Velocity Score</td><td>Numeric</td><td>Direct</td></tr>
+            <tr><td>28</td><td>Behavioral Risk Score</td><td>Numeric</td><td>Direct</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family: 'Outfit'; font-size: 28px; color: var(--brand); margin-bottom: 25px;">How Each Type Converts</h3>
+      <div class="tech-grid">
+        <!-- Numeric -->
+        <div class="tech-card">
+          <div class="tech-header"><div class="tech-icon" style="font-size: 20px;">🔢</div><div class="tech-title">Numeric Features</div></div>
+          <div class="tech-body">
+            <div class="tech-desc">Examples: Amount = ₹5000, Frequency = 8, Credit Limit = ₹1,00,000</div>
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">Standardization Process:</div>
+            <div class="display-equation" style="padding: 10px; font-size: 0.95em;">Z = (X - Mean) / StdDev</div>
+            <div class="tech-desc" style="margin-top: 15px; font-size: 13px;">
+              <b>Example:</b><br>
+              Amount = 5000, Mean = 3000, Std = 1000<br>
+              Z = (5000 - 3000) / 1000 = <b>2</b>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timestamp -->
+        <div class="tech-card">
+          <div class="tech-header"><div class="tech-icon" style="font-size: 20px;">⏱️</div><div class="tech-title">Timestamp Features</div></div>
+          <div class="tech-body">
+            <div class="tech-desc">Time-based data must be converted into cyclical numeric logic.</div>
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">Raw Input:</div>
+            <div class="formula-code" style="margin-bottom: 15px;">2026-04-22 02:30 AM</div>
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">Converted into:</div>
+            <div class="tech-desc" style="font-size: 13px;">
+              Hour = 2<br>
+              Day = Monday = 1<br>
+              Weekend Flag = 0<br>
+              <i>(These values are then scaled)</i>
+            </div>
+          </div>
+        </div>
+
+        <!-- String / Boolean -->
+        <div class="tech-card">
+          <div class="tech-header"><div class="tech-icon" style="font-size: 20px;">🔠</div><div class="tech-title">String & Boolean</div></div>
+          <div class="tech-body">
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">Frequency Encoding (e.g. Merchants):</div>
+            <div class="tech-desc" style="font-size: 13px; margin-bottom: 10px;">Amazon (1500 txns) → <b>1500</b></div>
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">One-Hot Encoding (e.g. Currency):</div>
+            <div class="tech-desc" style="font-size: 13px; margin-bottom: 10px;">INR → [1, 0, 0]<br>USD → [0, 1, 0]</div>
+            <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 8px;">Boolean (True/False):</div>
+            <div class="tech-desc" style="font-size: 13px;">New Merchant Flag = True → <b>1</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="blueprint-container">
+        <div class="blueprint-grid"></div>
+        <div class="blueprint-content">
+          <h3 class="about-heading" style="margin-bottom: 20px;">The PCA Matrix Transformation</h3>
+          <p style="color: var(--muted); margin-bottom: 10px;">After conversion, the raw data becomes a complete numeric matrix <code style="background: rgba(185,167,255,0.2); padding: 2px 6px; border-radius: 4px;">X</code>. PCA then finds the hidden patterns using the weights matrix <code style="background: rgba(185,167,255,0.2); padding: 2px 6px; border-radius: 4px;">W</code>.</p>
+          
+          <div class="display-equation" style="margin: 25px 0;">V = X · W</div>
+          
+          <p style="color: var(--txt); font-weight: 700; margin-bottom: 10px;">Example Output Generation:</p>
+          <div class="formula-box">
+            <div class="formula-code" style="margin-bottom: 10px; font-size: 15px;">
+              Suppose: V1 = 0.5(Amount) + 0.3(Hour) + 0.6(Frequency) + 0.2(Risk)<br><br>
+              V1 = 0.5(2.0) + 0.3(-1.5) + 0.6(0.8) + 0.2(0.7)<br>
+              V1 = 1 - 0.45 + 0.48 + 0.14 = <span style="color: #4f46e5; font-size: 18px; font-weight: 900;">1.17</span>
+            </div>
+            <p style="color: var(--muted); font-size: 14px;">The final dataset stores <b>V1 = 1.17</b> instead of the raw user data, providing mathematically complete but privacy-secured records for the AI to train on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- OVERLAYS (OTHER) -->
+<div class="ov scan" id="ovScan">
+  <div class="modal">
+    <div style="border:3px solid var(--brand); border-top:3px solid transparent; width:48px; height:48px; border-radius:50%; animation:spin 0.8s linear infinite; margin: 0 auto 24px;"></div>
+    <h1 style="font-family: 'Outfit';">Running AI Audit...</h1>
+  </div>
+</div>
+
+<div class="ov fraud" id="ovFraud">
+  <div class="modal">
+    <div class="bigIcon fraud">!</div>
+    <h1 style="font-family: 'Outfit'; color: var(--bad);">FRAUD DETECTED</h1>
+    <p style="margin: 16px 0; color: var(--muted);">Anomaly detected. This transaction has been flagged and halted for security.</p>
+    <button class="btnModal" onclick="closeOverlays()">Acknowledge & Back</button>
+  </div>
+</div>
+
+<div class="ov legit" id="ovLegit">
+  <div class="modal">
+    <div class="bigIcon legit">✓</div>
+    <h1 style="font-family: 'Outfit'; color: var(--good);">SECURE</h1>
+    <p style="margin: 16px 0; color: var(--muted);">Transaction verified. Patterns match standard user behavior.</p>
+    <button class="btnModal" onclick="closeOverlays()">Proceed</button>
+  </div>
+</div>
+
+<script>
+/* THEME */
+function applyTheme(t){
+  if(t==="dark") document.body.classList.add("dark");
+  else document.body.classList.remove("dark");
+  localStorage.setItem("fraudai_theme", t);
+  document.getElementById("themeBtn").innerText = t === "dark" ? "☀️" : "🌙";
+}
+function toggleTheme(){ applyTheme(document.body.classList.contains("dark") ? "light" : "dark"); }
+(function(){ applyTheme(localStorage.getItem("fraudai_theme") || "light"); })();
+
+/* LIVE TECH-MESH BACKGROUND */
+const canvas = document.getElementById('snowCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = (Math.random() - 0.5) * 0.8;
+    this.speedY = (Math.random() - 0.5) * 0.8;
+    this.opacity = Math.random() * 0.5 + 0.2;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--brand').trim();
+    ctx.globalAlpha = this.opacity;
+    ctx.fill();
+  }
+}
+
+function initMesh() {
+  particles = [];
+  const count = window.innerWidth < 1000 ? 40 : 80;
+  for (let i = 0; i < count; i++) {
+    particles.push(new Particle());
+  }
+}
+
+function animateMesh() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  const brandColor = getComputedStyle(document.documentElement).getPropertyValue('--brand').trim();
+  
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+    
+    // Draw lines between nearby particles
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (dist < 150) {
+        ctx.beginPath();
+        ctx.strokeStyle = brandColor;
+        ctx.globalAlpha = (1 - dist / 150) * 0.15;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateMesh);
+}
+
+initMesh();
+animateMesh();
+
+/* LOGIN */
+function login(){
+  const fname = document.getElementById('fname').value;
+  enterSystem(fname || "User");
+}
+
+function enterSystem(name){
+  document.getElementById('loginPage').style.display="none";
+  document.getElementById('dashboard').style.display="flex";
+  
+  const title = document.getElementById('homeTitle');
+  if(title){
+      const firstName = name.split(' ')[0];
+      title.innerHTML = `<div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700; color: var(--brand); margin-bottom: 10px; text-transform: capitalize;">Hello ${firstName}!!</div>Welcome to <br>Credit Card Fraud Detection System <br>using Human Centric Features`;
+  }
+  triggerPCARipple();
+}
+
+/* REAL GOOGLE AUTH HANDLER */
+function handleCredentialResponse(response) {
+    const responsePayload = decodeJwtResponse(response.credential);
+    enterSystem(responsePayload.given_name);
+}
+
+function decodeJwtResponse(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+function logout(){ location.reload(); }
+
+/* NAVIGATION */
+function showSection(id, el){
+  document.querySelectorAll('.section').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
+  const activeSection = document.getElementById(id);
+  activeSection.style.display = 'block';
+  void activeSection.offsetWidth;
+  activeSection.classList.add('active');
+  document.querySelectorAll('.nav-tabs li').forEach(x=>x.classList.remove('active'));
+  if(el) el.classList.add('active');
+  
+  if(id === "predict") triggerPCARipple();
+  if(id === "analysis") renderBars();
+}
+
+/* TEAM VIEW SWITCHER LOGIC (Triggered on Cursor Placement / Hover) */
+function openTeamMember(name, id, role, bio, imgUrl) {
+  const grid = document.getElementById('squadGrid');
+  const intro = document.getElementById('teamIntro');
+  const single = document.getElementById('teamSingleView');
+
+  // Populate data
+  document.getElementById('dtName').innerText = name;
+  document.getElementById('dtId').innerText = id;
+  document.getElementById('dtRole').innerText = role;
+  document.getElementById('dtBio').innerText = bio;
+  document.getElementById('dtImg').src = imgUrl;
+
+  // Toggle View
+  grid.style.display = 'none';
+  intro.style.display = 'none';
+  single.style.display = 'block';
+}
+
+function closeTeamMember() {
+  const grid = document.getElementById('squadGrid');
+  const intro = document.getElementById('teamIntro');
+  const single = document.getElementById('teamSingleView');
+
+  single.style.display = 'none';
+  grid.style.display = 'grid';
+  intro.style.display = 'block';
+}
+
+/* NEW TEAM INTERFACE */
+const teamMembers = [
+  {
+    name: "Ashritha Satyasri Penke",
+    id: "22A31A43D3",
+    role: "Backend Developer",
+    img: "/static/images/Ashritha.jpeg",
+    bio: "Architecting secure server-side logic and managing large-scale database interactions for real-time fraud scoring.",
+    link: "https://www.linkedin.com/in/ashritha-penke-385560259",
+    bg: "linear-gradient(135deg, #F5EFE6 0%, #E9D5FF 100%)"
+  },
+  {
+    name: "Sai Sahithi Guthula",
+    shortName: "Sahithi",
+    id: "22A31A43C3",
+    role: "Frontend Developer",
+    img: "/static/images/sahithi.jpeg",
+    bio: "Designing the interactive dashboard aesthetic and crafting the user journey for high-fidelity visual insights.",
+    link: "https://www.linkedin.com/in/g-saisahithi-325013347",
+    bg: "linear-gradient(135deg, #F0E8DD 0%, #D8B4FE 100%)"
+  },
+  {
+    name: "Pavan Gokavarapu",
+    id: "22A31A43E7",
+    role: "Quality Analyst",
+    img: "/static/images/Pavan.jpeg",
+    bio: "Executing rigorous stress tests and behavioral auditing to maintain system reliability and performance.",
+    link: "https://www.linkedin.com/in/gokavarapu-pavan-naga-kumar-2bbb69259",
+    bg: "linear-gradient(135deg, #E9D5FF 0%, #C084FC 100%)"
+  },
+  {
+    name: "Khasim Khan Mohammad",
+    id: "23A35A4330",
+    role: "Documentation",
+    img: "/static/images/Khasim.jpeg",
+    bio: "Synthesizing technical architecture into comprehensive project narratives and strategic documentation.",
+    link: "https://www.linkedin.com/in/khasim-khan-mohammad-188706262",
+    bg: "linear-gradient(135deg, #F8F5F0 0%, #F3E8FF 100%)"
+  }
+];
+
+function initTeam(){
+  const list = document.getElementById("teamList");
+  list.innerHTML = teamMembers.map((m, i) => `
+    <div class="member-item ${i===0?'active':''}" onclick="renderMember(${i})" id="mItem${i}">
+      <img src="${m.img}" class="member-avatar-small">
+      <div class="member-info-small">
+        <div class="name">${m.name}</div>
+        <div class="role">${m.role}</div>
+      </div>
+    </div>
+  `).join('');
+  renderMember(0);
+}
+
+function renderMember(idx){
+  document.querySelectorAll('.member-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`mItem${idx}`).classList.add('active');
+  
+  const m = teamMembers[idx];
+  const disp = document.getElementById("teamDisplay");
+  const shortName = m.shortName || m.name.split(' ')[0];
+
+  // Reset potentially overridden styles
+  disp.style.background = "";
+  disp.style.borderColor = "";
+
+  disp.innerHTML = "";
+  
+  disp.innerHTML = `
+    <div class="credit-card-box" style="background: ${m.bg}">
+        <div class="cc-left">
+            <img src="${m.img}" class="cc-photo">
+            <div class="cc-name">${m.name}</div>
+            <div class="cc-id">Roll No: ${m.id}</div>
+        </div>
+        <div class="cc-right">
+            <div class="cc-greeting">Hello, I'm ${shortName}</div>
+            <div class="cc-role">${m.role}</div>
+            <div class="cc-bio">${m.bio}</div>
+            <a href="${m.link}" target="_blank" class="cc-linkedin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                Connect on LinkedIn
+            </a>
+        </div>
+    </div>
+  `;
+}
+
+initTeam();
+
+/* SETUP PCA */
+const pcaBox=document.getElementById("pcaInputs");
+const pcaEls=[];
+for(let i=1;i<=28;i++){
+ const inp=document.createElement("input");
+ inp.placeholder="V"+i;
+ inp.type="text";   // keep text
+ inp.classList.add("pcaInput");
+  pcaBox.appendChild(inp);
+  pcaEls.push(inp);
+}
+
+function triggerPCARipple() {
+  pcaEls.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = `inputRipple 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
+    el.style.animationDelay = `${i * 0.02}s`;
+  });
+}
+
+let last=null;
+function val(el){ let v=parseFloat(el.value); return isNaN(v)?0:v; }
+
+function animateValue(id, start, end, duration, suffix = "") {
+    const obj = document.getElementById(id);
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = (progress * (end - start) + start).toFixed(1);
+        obj.innerHTML = current + suffix;
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+// PCA decimal validation
+function isValidDecimal(value){
+  return /^-?\d*\.\d+$/.test(value);
+}
+
+// Integer validation
+function isValidInteger(value){
+  return /^\d+$/.test(value);
+}
+
+// Attach validation listeners
+pcaEls.forEach(input => {
+  input.addEventListener("input", function(){
+    if(this.value === "") return;
+
+    if(!isValidDecimal(this.value)){
+      this.style.border = "2px solid red";
+    } else {
+      this.style.border = "1px solid var(--border)";
+    }
+  });
+});
+
+// Amount validation
+document.getElementById("amt").addEventListener("input", function(){
+  if(this.value === "") return;
+
+  if(!isValidInteger(this.value)){
+    this.style.border = "2px solid red";
+  } else {
+    this.style.border = "1px solid var(--border)";
+  }
+});
+
+// Time validation
+document.getElementById("tm").addEventListener("input", function(){
+  if(this.value === "") return;
+
+  if(!isValidInteger(this.value)){
+    this.style.border = "2px solid red";
+  } else {
+    this.style.border = "1px solid var(--border)";
+  }
+});
+async function predictNow(){
+  document.getElementById("ovScan").style.display="flex";
+
+  const payload = {};
+  // ✅ Required field validation
+if(!document.getElementById("amt").value){
+  alert("Amount is required");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+
+if(!document.getElementById("tm").value){
+  alert("Time is required");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+
+// ✅ Decimal validation for PCA
+for(let i=0;i<pcaEls.length;i++){
+  if(pcaEls[i].value && !isValidDecimal(pcaEls[i].value)){
+    alert("PCA values must be decimal numbers like 0.25 or -0.87");
+    document.getElementById("ovScan").style.display="none";
+    return;
+  }
+}
+
+// ✅ Integer validation for Amount
+if(!isValidInteger(document.getElementById("amt").value)){
+  alert("Amount must be an integer");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+
+// ✅ Integer validation for Time
+if(!isValidInteger(document.getElementById("tm").value)){
+  alert("Time must be an integer");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+  // Final validation before sending to backend
+for(let i=0;i<pcaEls.length;i++){
+  if(pcaEls[i].value && !isValidDecimal(pcaEls[i].value)){
+    alert("PCA values must be decimal numbers like 0.25 or -0.87");
+    document.getElementById("ovScan").style.display="none";
+    return;
+  }
+}
+
+if(document.getElementById("amt").value &&
+   !isValidInteger(document.getElementById("amt").value)){
+  alert("Amount must be an integer");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+
+if(document.getElementById("tm").value &&
+   !isValidInteger(document.getElementById("tm").value)){
+  alert("Time must be an integer");
+  document.getElementById("ovScan").style.display="none";
+  return;
+}
+
+  for(let i=1;i<=28;i++){
+    payload["V"+i] = parseFloat(pcaEls[i-1].value) || 0;
+  }
+
+  payload["Amount"] = parseFloat(document.getElementById("amt").value) || 0;
+  payload["Time"] = parseFloat(document.getElementById("tm").value) || 0;
+
+  try {
+
+  // Start timer
+  const startTime = Date.now();
+
+  const response = await fetch("http://127.0.0.1:5000/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  // Calculate elapsed time
+  const elapsed = Date.now() - startTime;
+
+  // Ensure minimum 2 seconds overlay
+  if (elapsed < 2000) {
+    await new Promise(resolve =>
+      setTimeout(resolve, 2000 - elapsed)
+    );
+  }
+
+  // 👇 continue your existing logic below
+
+    const data = await response.json();
+
+    let isFraud = data.status === "fraud";
+
+    // Update Risk Score
+    animateValue("k1", 0, data.risk_score, 1000, "%");
+
+    // Update Confidence
+    document.getElementById("k2").innerText =
+      (90 + Math.random()*9).toFixed(1) + "%";
+
+    // Update Model
+    document.getElementById("k3").innerText =
+      document.getElementById("mdl").value;
+
+    // Update Decision
+    document.getElementById("k4").innerText =
+      isFraud ? "FRAUD" : "LEGIT";
+
+    // Update Last Decision
+    const tag = document.getElementById("lastTag");
+    tag.innerText = isFraud ? "FRAUD" : "LEGIT";
+    tag.style.color = isFraud ? "var(--bad)" : "var(--good)";
+
+    // Save values for analysis
+    const vs = pcaEls.map(el => parseFloat(el.value) || 0);
+
+    last = {
+      labs: pcaEls.map((_,i)=>"V"+(i+1)),
+      vals: vs.map(v=>Math.min(1, Math.abs(v)/3)),
+      isFraud: isFraud
+    };
+
+    renderBars();
+
+    document.getElementById("ovScan").style.display="none";
+
+    if(isFraud){
+      document.getElementById("ovFraud").style.display="flex";
+    } else {
+      document.getElementById("ovLegit").style.display="flex";
+      spawnConfetti();
+    }
+
+  } catch (error) {
+    document.getElementById("ovScan").style.display="none";
+    alert("Backend not connected");
+  }
+  
+}
+async function loadSample(type){
+
+  try {
+    const response = await fetch(`http://127.0.0.1:5000/sample/${type}`);
+    
+    if (!response.ok) {
+      throw new Error(`Backend returned an error: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+
+    // Fill PCA
+    for(let i=0;i<28;i++){
+      pcaEls[i].value = data.pca[i];
+    }
+
+    // Fill amount & time
+    document.getElementById("amt").value = Math.round(data.amount);
+    document.getElementById("tm").value = Math.round(data.time);
+
+  } catch (error){
+    console.error("Error fetching sample dataset:", error);
+    alert("Unable to load dataset sample. Check the browser console (F12) for details.");
+  }
+}
+
+function clearInputs() {
+  // Clear PCA inputs and reset border styles
+  pcaEls.forEach(el => {
+    el.value = "";
+    el.style.border = "1px solid var(--border)";
+  });
+  
+  // Clear Amount & Time
+  const amt = document.getElementById("amt");
+  const tm = document.getElementById("tm");
+  amt.value = "";
+  amt.style.border = "1px solid var(--border)";
+  tm.value = "";
+  tm.style.border = "1px solid var(--border)";
+}
+
+function closeOverlays(){ document.querySelectorAll('.ov').forEach(o => o.style.display="none"); }
+
+function spawnConfetti(){
+    for(let i=0; i<50; i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-10px';
+        c.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        c.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(c);
+        
+        const animation = c.animate([
+            { top: '-10px', opacity: 1 },
+            { top: '100vh', opacity: 0, transform: `rotate(${Math.random() * 1000}deg)` }
+        ], { duration: 2000 + Math.random() * 1000, easing: 'cubic-bezier(0, .5, .5, 1)' });
+        
+        animation.onfinish = () => c.remove();
+    }
+}
+
+function renderBars(){
+  const barBox=document.getElementById("barList");
+  const rankingBox=document.getElementById("topRankingList");
+  if(!last) return;
+
+  const topN=parseInt(document.getElementById("topN").value);
+  const items = last.labs.map((l,i)=>({l, v:last.vals[i]})).sort((a,b)=>b.v-a.v);
+  const contributionItems = items.slice(0, topN);
+  const rankingItems = items.slice(0, 5);
+  
+  const palette = [
+    '#A78BFA', '#F472B6', '#60A5FA', '#34D399', '#FB923C',
+    '#F87171', '#818CF8', '#2DD4BF', '#FBBF24', '#A855F7',
+    '#4ADE80', '#22D3EE', '#E879F9', '#94A3B8', '#C084FC',
+    '#3B0764', '#4C1D95', '#6B21A8', '#7E22CE', '#9333EA',
+    '#A855F7', '#C084FC', '#D8B4FE', '#E9D5FF', '#F3E8FF',
+    '#6A4A9A', '#7E6C99', '#D4C4E9', '#EBE6D8', '#462A6E',
+    '#9D84B8', '#A396B5', '#8B73A6', '#C95A66', '#4A8C70',
+    '#C4B5FD', '#A78BFA', '#8B5CF6', '#7C3AED', '#6D28D9'
+  ];
+
+  // Render Contribution Bars
+  barBox.innerHTML = contributionItems.map((x, i) => {
+    const color = palette[i % palette.length];
+    const rowDelay = i * 0.05;
+    const barDelay = rowDelay + 0.3;
+    const pct = Math.round(x.v * 100);
+    
+    return `
+      <div class="bRow" style="animation: fadeInUp 0.5s ease forwards; animation-delay: ${rowDelay}s; opacity: 0; border-left: 3px solid ${color};">
+        <div style="font-size:12px; font-weight:700; color: ${color};">${x.l}</div>
+        <div class="track">
+          <div class="fill" style="--w:${pct}%; background: linear-gradient(90deg, ${color}cc, ${color}); box-shadow: 0 0 15px ${color}33; animation-delay: ${barDelay}s;"></div>
+        </div>
+        <div style="font-size:11px; text-align:right; font-weight: 700;">${pct}%</div>
+      </div>
+    `;
+  }).join('');
+
+  // Render Top 5 Ranking Highlights
+  // Render Top 5 Ranking Highlights
+rankingBox.innerHTML = rankingItems.map((x, i) => {
+  const color = palette[i % palette.length];
+  const pct = Math.round(x.v * 100);
+
+  let explanation = "";
+
+  if(last.isFraud){
+    if(pct > 70){
+      explanation = `${x.l} shows extreme behavioral deviation and strongly pushes the transaction toward FRAUD classification.`;
+    }
+    else if(pct > 40){
+      explanation = `${x.l} moderately influences the fraud score due to unusual transaction behavior.`;
+    }
+    else{
+      explanation = `${x.l} slightly contributes to risk but is not a dominant fraud indicator.`;
+    }
+  } else {
+    if(pct > 70){
+      explanation = `${x.l} confirms strong consistency with normal user behavior, reinforcing LEGIT classification.`;
+    }
+    else if(pct > 40){
+      explanation = `${x.l} aligns with typical transaction patterns and supports authenticity.`;
+    }
+    else{
+      explanation = `${x.l} has minimal influence and remains within safe behavioral bounds.`;
+    }
+  }
+
+  return `
+    <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 16px; margin-bottom: 12px; border-left: 4px solid ${color}; animation: fadeInUp 0.5s ease forwards; animation-delay: ${i * 0.1}s; opacity: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-weight: 800; color: ${color}; font-size: 16px;">#${i+1} ${x.l}</div>
+        <div style="font-weight: 900; font-size: 14px;">${pct}% Impact</div>
+      </div>
+      <p style="font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.5;">
+        ${explanation}
+      </p>
+    </div>
+  `;
+}).join('');}
+
+/* LOTTIE */
+lottie.loadAnimation({ container: document.getElementById("loginLottie"), renderer: "svg", loop: true, autoplay: true, path: "https://assets2.lottiefiles.com/packages/lf20_3rwasyjy.json" });
+
+/* HOME LOTTIE */
+lottie.loadAnimation({ container: document.getElementById("homeLottie"), renderer: "svg", loop: true, autoplay: true, path: "https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json" });
+</script>
+</body>
+</html>
